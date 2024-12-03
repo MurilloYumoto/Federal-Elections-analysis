@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"$schema": "https://vega.github.io/schema/vega/v5.json", "data": [{"name": "param_15_store"}, {"name": "source_0"}, {"name": "data_0", "values": [{"count": 33560, "count_end": 33560.0, "count_start": 0.0, "occupation": "RETIRED"}, {"count": 13744, "count_end": 13744.0, "count_start": 0.0, "occupation": "ATTORNEY"}, {"count": 6673, "count_end": 6673.0, "count_start": 0.0, "occupation": "PHYSICIAN"}, {"count": 5901, "count_end": 5901.0, "count_start": 0.0, "occupation": "HOMEMAKER"}, {"count": 5645, "count_end": 5645.0, "count_start": 0.0, "occupation": "PRESIDENT"}, {"count": 3960, "count_end": 3960.0, "count_start": 0.0, "occupation": "INFORMATION REQUESTED"}, {"count": 3296, "count_end": 3296.0, "count_start": 0.0, "occupation": "EXECUTIVE"}, {"count": 3167, "count_end": 3167.0, "count_start": 0.0, "occupation": "CONSULTANT"}, {"count": 3110, "count_end": 3110.0, "count_start": 0.0, "occupation": "OWNER"}, {"count": 2667, "count_end": 2667.0, "count_start": 0.0, "occupation": "CEO"}, {"count": 2217, "count_end": 2217.0, "count_start": 0.0, "occupation": "PROFESSOR"}, {"count": 1911, "count_end": 1911.0, "count_start": 0.0, "occupation": "LAWYER"}]}, {"name": "source_0_x_domain_occupation", "values": [{"occupation": "RETIRED", "sort_field": 33560}, {"occupation": "ATTORNEY", "sort_field": 13744}, {"occupation": "PHYSICIAN", "sort_field": 6673}, {"occupation": "HOMEMAKER", "sort_field": 5901}, {"occupation": "PRESIDENT", "sort_field": 5645}, {"occupation": "INFORMATION REQUESTED", "sort_field": 3960}, {"occupation": "EXECUTIVE", "sort_field": 3296}, {"occupation": "CONSULTANT", "sort_field": 3167}, {"occupation": "OWNER", "sort_field": 3110}, {"occupation": "CEO", "sort_field": 2667}, {"occupation": "PROFESSOR", "sort_field": 2217}, {"occupation": "LAWYER", "sort_field": 1911}]}], "signals": [{"name": "unit", "value": {}, "on": [{"events": "pointermove", "update": "isTuple(group()) ? group() : unit"}]}, {"name": "param_15", "update": "vlSelectionResolve(\"param_15_store\", \"union\", true, true)"}, {"name": "param_15_tuple", "on": [{"events": [{"source": "scope", "type": "mouseover"}], "update": "datum && item().mark.marktype !== 'group' && indexof(item().mark.role, 'legend') < 0 ? {unit: \"\", fields: param_15_tuple_fields, values: [(item().isVoronoi ? datum.datum : datum)[\"occupation\"]]} : null", "force": true}, {"events": [{"source": "view", "type": "dblclick"}], "update": "null"}]}, {"name": "param_15_tuple_fields", "value": [{"type": "E", "field": "occupation"}]}, {"name": "param_15_toggle", "value": false, "on": [{"events": [{"source": "scope", "type": "mouseover"}], "update": "event.shiftKey"}, {"events": [{"source": "view", "type": "dblclick"}], "update": "false"}]}, {"name": "param_15_modify", "on": [{"events": {"signal": "param_15_tuple"}, "update": "modify(\"param_15_store\", param_15_toggle ? null : param_15_tuple, param_15_toggle ? null : true, param_15_toggle ? param_15_tuple : null)"}]}], "marks": [{"type": "rect", "name": "marks", "from": {"data": "data_0"}, "encode": {"update": {"tooltip": {"signal": "{\"occupation\": isValid(datum[\"occupation\"]) ? datum[\"occupation\"] : \"\"+datum[\"occupation\"], \"Contagem da classe -\": format(datum[\"count\"], \"\")}"}, "fill": [{"field": "occupation", "scale": "color", "test": "length(data(\"param_15_store\")) && vlSelectionTest(\"param_15_store\", datum)"}, {"value": "lightgray"}], "y2": {"field": "count_start", "scale": "y"}, "x": {"field": "occupation", "scale": "x"}, "y": {"field": "count_end", "scale": "y"}, "width": {"signal": "max(0.25, bandwidth('x'))"}}}, "style": ["bar"], "interactive": true}], "scales": [{"name": "x", "type": "band", "domain": {"data": "source_0_x_domain_occupation", "field": "occupation", "sort": {"op": "max", "field": "sort_field", "order": "descending"}}, "range": [0, {"signal": "width"}], "paddingOuter": 0.05, "paddingInner": 0.1}, {"name": "y", "type": "linear", "domain": {"data": "data_0", "fields": ["count_start", "count_end"]}, "range": [{"signal": "height"}, 0], "nice": true, "zero": true}, {"name": "color", "type": "ordinal", "domain": ["RETIRED", "ATTORNEY", "PHYSICIAN", "HOMEMAKER", "PRESIDENT", "INFORMATION REQUESTED", "EXECUTIVE", "CONSULTANT", "OWNER", "CEO", "PROFESSOR", "LAWYER"], "range": ["#0b132b", "#152139", "#202e47", "#2a3c56", "#354964", "#3a506b", "#467787", "#4c8a95", "#57b1b1", "#5dc5bf", "#63d8cd", "#69ecdb", "#6fffe9"], "interpolate": "hcl"}], "axes": [{"scale": "y", "zindex": 0, "orient": "left", "gridScale": "x", "ticks": false, "tickCount": {"signal": "ceil(height/40)"}, "labels": false, "grid": true, "minExtent": 0, "aria": false, "domain": false, "maxExtent": 0}, {"scale": "x", "labelAlign": "right", "labelBaseline": "top", "zindex": 0, "grid": false, "title": "Occupation", "orient": "bottom"}, {"scale": "y", "labelOverlap": true, "orient": "left", "title": "Contagem das classes", "labelAlign": "right", "tickCount": {"signal": "ceil(height/40)"}, "zindex": 0, "grid": false}], "height": 300, "background": "rgba(0, 0, 0, 0)", "width": 800, "padding": 5, "style": "cell", "legends": [{"title": "occupation", "fill": "color", "symbolType": "square"}], "config": {"axis": {"labelFontSize": 12, "titleFontSize": 14, "labelFont": "Arial", "titleFont": "Arial", "labelAngle": -45}, "legend": {"titleFontSize": 14, "labelFontSize": 12, "labelFont": "Arial", "titleFont": "Arial"}, "style": {"cell": {"fill": "white"}, "group-title": {"fontSize": 18, "font": "Arial", "fill": "black"}}}};
+      var embedOpt = {"mode": "vega"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>

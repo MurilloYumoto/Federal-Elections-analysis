@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
+    }
+
+    #vis.vega-embed details,
+    #vis.vega-embed details summary {
+      position: relative;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+  <div id="vis"></div>
+  <script>
+    (function(vegaEmbed) {
+      var spec = {"$schema": "https://vega.github.io/schema/vega/v5.json", "data": [{"name": "param_19_store"}, {"name": "source_0"}, {"name": "data_0", "values": [{"count": 21162, "count_end": 21162.0, "count_start": 0.0, "employer": "RETIRED"}, {"count": 12358, "count_end": 12358.0, "count_start": 0.0, "employer": "SELF-EMPLOYED"}, {"count": 6772, "count_end": 6772.0, "count_start": 0.0, "employer": "SELF"}, {"count": 5951, "count_end": 5951.0, "count_start": 0.0, "employer": "NONE"}, {"count": 4057, "count_end": 4057.0, "count_start": 0.0, "employer": "SELF EMPLOYED"}, {"count": 3921, "count_end": 3921.0, "count_start": 0.0, "employer": "NOT EMPLOYED"}, {"count": 3037, "count_end": 3037.0, "count_start": 0.0, "employer": "HOMEMAKER"}, {"count": 2568, "count_end": 2568.0, "count_start": 0.0, "employer": "INFORMATION REQUESTED"}, {"count": 1077, "count_end": 1077.0, "count_start": 0.0, "employer": "REQUESTED"}, {"count": 980, "count_end": 980.0, "count_start": 0.0, "employer": "RETIRED/RETIRED"}, {"count": 424, "count_end": 424.0, "count_start": 0.0, "employer": "N/A/RETIRED"}, {"count": 384, "count_end": 384.0, "count_start": 0.0, "employer": "INFORMATION REQUESTED PER BEST EFFO"}]}, {"name": "source_0_x_domain_employer", "values": [{"employer": "RETIRED", "sort_field": 21162}, {"employer": "SELF-EMPLOYED", "sort_field": 12358}, {"employer": "SELF", "sort_field": 6772}, {"employer": "NONE", "sort_field": 5951}, {"employer": "SELF EMPLOYED", "sort_field": 4057}, {"employer": "NOT EMPLOYED", "sort_field": 3921}, {"employer": "HOMEMAKER", "sort_field": 3037}, {"employer": "INFORMATION REQUESTED", "sort_field": 2568}, {"employer": "REQUESTED", "sort_field": 1077}, {"employer": "RETIRED/RETIRED", "sort_field": 980}, {"employer": "N/A/RETIRED", "sort_field": 424}, {"employer": "INFORMATION REQUESTED PER BEST EFFO", "sort_field": 384}]}], "signals": [{"name": "unit", "value": {}, "on": [{"events": "pointermove", "update": "isTuple(group()) ? group() : unit"}]}, {"name": "param_19", "update": "vlSelectionResolve(\"param_19_store\", \"union\", true, true)"}, {"name": "param_19_tuple", "on": [{"events": [{"source": "scope", "type": "mouseover"}], "update": "datum && item().mark.marktype !== 'group' && indexof(item().mark.role, 'legend') < 0 ? {unit: \"\", fields: param_19_tuple_fields, values: [(item().isVoronoi ? datum.datum : datum)[\"employer\"]]} : null", "force": true}, {"events": [{"source": "view", "type": "dblclick"}], "update": "null"}]}, {"name": "param_19_tuple_fields", "value": [{"type": "E", "field": "employer"}]}, {"name": "param_19_toggle", "value": false, "on": [{"events": [{"source": "scope", "type": "mouseover"}], "update": "event.shiftKey"}, {"events": [{"source": "view", "type": "dblclick"}], "update": "false"}]}, {"name": "param_19_modify", "on": [{"events": {"signal": "param_19_tuple"}, "update": "modify(\"param_19_store\", param_19_toggle ? null : param_19_tuple, param_19_toggle ? null : true, param_19_toggle ? param_19_tuple : null)"}]}], "marks": [{"type": "rect", "name": "marks", "from": {"data": "data_0"}, "encode": {"update": {"fill": [{"field": "employer", "scale": "color", "test": "length(data(\"param_19_store\")) && vlSelectionTest(\"param_19_store\", datum)"}, {"value": "lightgray"}], "y": {"field": "count_end", "scale": "y"}, "width": {"signal": "max(0.25, bandwidth('x'))"}, "y2": {"field": "count_start", "scale": "y"}, "x": {"field": "employer", "scale": "x"}, "tooltip": {"signal": "{\"employer\": isValid(datum[\"employer\"]) ? datum[\"employer\"] : \"\"+datum[\"employer\"], \"Contagem da classe -\": format(datum[\"count\"], \"\")}"}}}, "style": ["bar"], "interactive": true}], "scales": [{"name": "x", "type": "band", "domain": {"data": "source_0_x_domain_employer", "field": "employer", "sort": {"op": "max", "field": "sort_field", "order": "descending"}}, "range": [0, {"signal": "width"}], "paddingOuter": 0.05, "paddingInner": 0.1}, {"name": "y", "type": "linear", "domain": {"data": "data_0", "fields": ["count_start", "count_end"]}, "range": [{"signal": "height"}, 0], "nice": true, "zero": true}, {"name": "color", "type": "ordinal", "domain": ["RETIRED", "SELF-EMPLOYED", "SELF", "NONE", "SELF EMPLOYED", "NOT EMPLOYED", "HOMEMAKER", "INFORMATION REQUESTED", "REQUESTED", "RETIRED/RETIRED", "N/A/RETIRED", "INFORMATION REQUESTED PER BEST EFFO"], "range": ["#0b132b", "#152139", "#202e47", "#2a3c56", "#354964", "#3a506b", "#467787", "#4c8a95", "#57b1b1", "#5dc5bf", "#63d8cd", "#69ecdb", "#6fffe9"], "interpolate": "hcl"}], "axes": [{"scale": "y", "maxExtent": 0, "minExtent": 0, "ticks": false, "aria": false, "domain": false, "labels": false, "zindex": 0, "orient": "left", "gridScale": "x", "grid": true, "tickCount": {"signal": "ceil(height/40)"}}, {"scale": "x", "grid": false, "labelAlign": "right", "labelBaseline": "top", "orient": "bottom", "title": "Employer", "zindex": 0}, {"scale": "y", "labelAlign": "right", "labelOverlap": true, "grid": false, "orient": "left", "title": "Contagem das classes", "tickCount": {"signal": "ceil(height/40)"}, "zindex": 0}], "legends": [{"title": "employer", "fill": "color", "symbolType": "square"}], "background": "rgba(0, 0, 0, 0)", "config": {"axis": {"labelFontSize": 12, "titleFontSize": 14, "labelFont": "Arial", "titleFont": "Arial", "labelAngle": -45}, "legend": {"titleFontSize": 14, "labelFontSize": 12, "labelFont": "Arial", "titleFont": "Arial"}, "style": {"cell": {"fill": "white"}, "group-title": {"fontSize": 18, "font": "Arial", "fill": "black"}}}, "padding": 5, "width": 800, "height": 300, "style": "cell"};
+      var embedOpt = {"mode": "vega"};
+
+      function showError(el, error){
+          el.innerHTML = ('<div style="color:red;">'
+                          + '<p>JavaScript Error: ' + error.message + '</p>'
+                          + "<p>This usually means there's a typo in your chart specification. "
+                          + "See the javascript console for the full traceback.</p>"
+                          + '</div>');
+          throw error;
+      }
+      const el = document.getElementById('vis');
+      vegaEmbed("#vis", spec, embedOpt)
+        .catch(error => showError(el, error));
+    })(vegaEmbed);
+
+  </script>
+</body>
+</html>
