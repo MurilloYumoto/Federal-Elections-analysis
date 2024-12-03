@@ -175,11 +175,13 @@ def line_plot_with_dropdown(df, date_col, value_col, category_col):
     Returns:
         alt.Chart: Gráfico Altair com o line plot e o dropdown.
     """
-
+    
     # Garantir que a coluna de datas esteja no formato datetime
     if not pd.api.types.is_datetime64_any_dtype(df[date_col]):
-        df[date_col] = df[date_col].astype(int).astype(str).str.zfill(8)
-        df[date_col] = pd.to_datetime(df[date_col], format='%m%d%Y')
+        try:
+            df[date_col] = pd.to_datetime(df[date_col], format='%Y-%m-%d')
+        except ValueError as e:
+            raise ValueError(f"Erro ao converter a coluna '{date_col}' para datetime. Detalhes: {e}")
 
     # Filtrar os dados para o intervalo de 2011 a 2013
     filtered_df = df[(df[date_col].dt.year >= 2011) & (df[date_col].dt.year <= 2013)]
